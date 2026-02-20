@@ -123,3 +123,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* TipTap Editor Placeholder */
+
+.tiptap p.is-editor-empty:first-child::before,
+.tiptap p.is-empty:first-child::before {
+  content: attr(data-placeholder) !important;
+  float: left;
+  color: #adb5bd !important;
+  font-style: italic;
+  pointer-events: none;
+  height: 0;
+  opacity: 1 !important;
+}

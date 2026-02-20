@@ -25,4 +25,10 @@ export default defineSchema({
     dimensions: 3072,
   }),
 
-})
+  notes: defineTable({
+    fileId: v.string(),
+    note: v.string(),
+    createBy: v.string()
+  })
+
+});

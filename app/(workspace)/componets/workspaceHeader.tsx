@@ -8,7 +8,7 @@ import { api } from '@/convex/_generated/api'
 import { Button } from '@/components/ui/button'
 import { ProfileMenu } from '@/components/auth/ProfileMenu'
 
-function WorkspaceHeader() {
+function WorkspaceHeader({ onSave }: { onSave?: () => void }) {
     const { fileId } = useParams()
     const router = useRouter()
 
@@ -18,16 +18,16 @@ function WorkspaceHeader() {
     )
 
     return (
-        <header className="relative flex items-center justify-between px-4 py-3 bg-white border-b border-gray-200">
+        <header className="flex items-center justify-between px-4 py-3 bg-white border-b border-gray-200">
             <button
                 onClick={() => router.push("/dashboard")}
-                className="flex items-center gap-2 text-sm font-medium text-black hover:opacity-70 transition-opacity"
+                className="flex items-center gap-2 text-lg font-semibold text-black hover:opacity-70 transition-opacity"
             >
                 <ArrowLeft className="w-5 h-5" />
                 <span>Workspace</span>
             </button>
 
-            <h1 className="absolute left-1/2 -translate-x-1/2 text-sm font-bold tracking-wide uppercase text-black">
+            <h1 className="text-lg font-semibold tracking-wide text-black">
                 {fileInfo?.fileName ?? "Untitled"}
             </h1>
 
@@ -35,10 +35,11 @@ function WorkspaceHeader() {
                 <Button
                     variant="brutal-dark"
                     className="rounded-full px-5 py-1 text-sm h-8"
+                    onClick={onSave}
                 >
                     Save
                 </Button>
-                <ProfileMenu />
+                <ProfileMenu className='mt-2' />
             </div>
         </header>
     )

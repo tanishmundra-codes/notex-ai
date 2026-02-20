@@ -1,8 +1,8 @@
 import React from 'react'
 
-export const PDFViewer = ({ fileUrl }: { fileUrl: string }) => {
+export const PDFViewer = ({ fileUrl }: { fileUrl?: string }) => {
     return (
-        <div className="h-[90vh] w-full">
+        <div className="w-full h-full bg-white shadow-sm border border-gray-200 overflow-hidden">
             <iframe
                 src={fileUrl ? fileUrl + "#toolbar=0&view=FitH" : ""}
                 className="w-full h-full border-none"
