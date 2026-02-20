@@ -1,13 +1,14 @@
 "use client";
 
 import { SignInButton as ClerkSignInButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 export function SignInButton() {
   return (
     <ClerkSignInButton mode="redirect" forceRedirectUrl="/sign-in">
-      <button className="rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-white transition-transform active:scale-95 cursor-pointer">
+      <Button variant="brutal-dark" className="px-5 py-5 text-base font-semibold cursor-pointer">
         Sign In
-      </button>
+      </Button>
     </ClerkSignInButton>
   );
 }
