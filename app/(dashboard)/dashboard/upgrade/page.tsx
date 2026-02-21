@@ -8,6 +8,7 @@ import { api } from "@/convex/_generated/api";
 
 interface PlanFeature {
   text: string;
+  highlighted?: boolean;
 }
 
 interface Plan {
@@ -27,10 +28,11 @@ const plans: Plan[] = [
     isCurrent: true,
     buttonLabel: "Current Plan",
     features: [
-      { text: "5 PDF Upload" },
-      { text: "Unlimited Notes Taking" },
-      { text: "Email support" },
-      { text: "Help center access" },
+      { text: "5 Active PDF Slots" },
+      { text: "Standard File Upload Support" },
+      { text: "Full AI Q&A Support", highlighted: true },
+      { text: "Access to PDF Viewer & Text Editor" },
+      { text: "Smart Summaries & Notes" },
     ],
   },
   {
@@ -39,10 +41,11 @@ const plans: Plan[] = [
     period: "/One Time",
     buttonLabel: "Get Started",
     features: [
-      { text: "Unlimited PDF Upload" },
-      { text: "Unlimited Notes Taking" },
-      { text: "Email support" },
-      { text: "Help center access" },
+      { text: "Unlimited PDF Uploads", highlighted: true },
+      { text: "Full AI Q&A Support", highlighted: true },
+      { text: "Faster Processing" },
+      { text: "Access to PDF Viewer & Text Editor" },
+      { text: "Priority Experience" },
     ],
   },
 ];
@@ -97,7 +100,9 @@ function PlanCard({ plan }: { plan: Plan }) {
         {plan.features.map((feature, i) => (
           <li key={i} className="flex items-center gap-2.5 text-sm">
             <CheckCircle2 className="h-4 w-4 shrink-0 text-black" />
-            <span className="text-gray-600">{feature.text}</span>
+            <span className={feature.highlighted ? "text-black font-semibold" : "text-gray-600"}>
+              {feature.text}
+            </span>
           </li>
         ))}
       </ul>
