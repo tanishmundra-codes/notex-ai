@@ -17,6 +17,7 @@ interface PricingPlan {
     name: string;
     tagline: string;
     validity: string;
+    buttonLabel?: string;
     features: PlanFeature[];
     isPopular?: boolean;
 }
@@ -27,28 +28,15 @@ const plans: PricingPlan[] = [
         price: "₹0/-",
         originalPrice: "Free Forever",
         name: "Free Plan",
-        tagline: "Perfect for trying it out before MSTs",
+        tagline: "Perfect for getting started",
         validity: "Lifetime Access (Free Forever)",
+        buttonLabel: "Start Free",
         features: [
-            { text: "3 Active PDF Slots (delete old to upload new)" },
-            { text: "Max file size: 2MB per PDF" },
+            { text: "5 Active PDF Slots" },
+            { text: "Standard File Upload Support" },
             { text: "Full AI Q&A Support", highlighted: true },
             { text: "Access to PDF Viewer & Text Editor" },
-        ],
-    },
-    {
-        badge: "Premium Plan",
-        price: "₹199/-",
-        originalPrice: "One-time payment",
-        name: "Premium Plan",
-        tagline: "Great for focused learning & exam prep",
-        validity: "Lifetime Access (One-time payment)",
-        isPopular: true,
-        features: [
-            { text: "15 Active PDF Slots" },
-            { text: "Max file size: 10MB per PDF" },
-            { text: "Full AI Q&A Support", highlighted: true },
-            { text: "Access to PDF Viewer & Text Editor" },
+            { text: "Smart Summaries & Notes" },
         ],
     },
     {
@@ -56,13 +44,15 @@ const plans: PricingPlan[] = [
         price: "₹299/-",
         originalPrice: "One-time payment",
         name: "Pro Plan",
-        tagline: "Complete academic solution",
+        tagline: "Unlimited learning, no limits",
         validity: "Lifetime Access (One-time payment)",
+        buttonLabel: "Buy Now",
         features: [
-            { text: "40 Active PDF Slots" },
-            { text: "Max file size: 25MB per PDF" },
+            { text: "Unlimited PDF Uploads", highlighted: true },
             { text: "Full AI Q&A Support", highlighted: true },
+            { text: "Faster Processing" },
             { text: "Access to PDF Viewer & Text Editor" },
+            { text: "Priority Experience" },
         ],
     },
 ];
@@ -88,20 +78,12 @@ function PricingCard({ plan, index }: { plan: PricingPlan; index: number }) {
                 <span className="text-4xl font-black text-black">{plan.price}</span>
             </div>
 
-            {/* Original price */}
-            <p className="mb-3 text-sm text-gray-400 line-through">{`Original Price: ${plan.originalPrice}`}</p>
 
             {/* Plan name */}
             <h3 className="text-lg font-extrabold text-black">{plan.name}</h3>
 
             {/* Tagline */}
             <p className="mb-1 text-sm font-medium text-gray-500">{plan.tagline}</p>
-
-            {/* Validity */}
-            <p className="mb-5 text-xs text-gray-500 leading-snug">
-                Valid for <span className="font-bold text-black">180 Days</span> for{" "}
-                <span className="font-bold text-black">1 Semester</span> from the day you purchase.
-            </p>
 
             {/* Divider */}
             <div className="mb-5 border-t border-gray-200" />
@@ -123,7 +105,7 @@ function PricingCard({ plan, index }: { plan: PricingPlan; index: number }) {
                 href="/dashboard"
                 className="mt-auto block w-full rounded-xl border-2 border-black py-3 text-center text-sm font-bold text-black shadow-[3px_3px_0px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_#000] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none transition-all duration-200"
             >
-                Buy Now
+                {plan.buttonLabel || "Buy Now"}
             </Link>
         </motion.div>
     );
@@ -131,7 +113,7 @@ function PricingCard({ plan, index }: { plan: PricingPlan; index: number }) {
 
 export default function Pricing() {
     return (
-        <section className="relative bg-white py-20 lg:py-32 px-6">
+        <section id="Pricing" className="relative bg-white py-20 lg:py-32 px-6">
             <div className="container mx-auto">
                 {/* Header */}
                 <motion.div
@@ -150,7 +132,7 @@ export default function Pricing() {
                 </motion.div>
 
                 {/* Cards */}
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-10 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-10 max-w-4xl mx-auto">
                     {plans.map((plan, index) => (
                         <PricingCard key={plan.name} plan={plan} index={index} />
                     ))}

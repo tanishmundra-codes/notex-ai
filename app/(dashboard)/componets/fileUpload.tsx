@@ -20,7 +20,7 @@ import { useUser } from '@clerk/nextjs';
 import { useAction } from "convex/react";
 
 
-function FileUpload() {
+function FileUpload({ isMaxFiles }: { isMaxFiles?: boolean }) {
     const generateUploadUrl = useMutation(api.fileStorage.generateUploadUrl);
     const addFileEntry = useMutation(api.fileStorage.AddFileEntryToDB);
     const embedDocuments = useAction(api.myAction.ingest);
@@ -89,6 +89,7 @@ function FileUpload() {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button
+                    disabled={isMaxFiles}
                     variant="brutal-dark"
                     className={`w-full rounded-full gap-2 ${open ? "bg-white text-black shadow-[1px_1px_0px_0px_#000] translate-x-[2px] translate-y-[2px]" : ""}`}
                 >

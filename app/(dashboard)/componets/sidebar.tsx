@@ -14,12 +14,18 @@ import FileUpload from "./fileUpload";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useUser } from '@clerk/nextjs'
+import { Turret_Road } from "next/font/google";
 
 export default function Sidebar() {
     const pathname = usePathname();
     const { user } = useUser();
 
-    const maxPDFs = 5;
+    const isUpgraded = useQuery(
+        api.user.getUserUpgradeStatus,
+        user?.primaryEmailAddress?.emailAddress
+            ? { email: user.primaryEmailAddress.emailAddress }
+            : "skip"
+    );
 
     const files = useQuery(
         api.fileStorage.getUserFiles,
@@ -27,6 +33,10 @@ export default function Sidebar() {
             ? { userEmail: user.primaryEmailAddress.emailAddress }
             : "skip"
     );
+
+    const maxPDFs = 5;
+    const currentFilesCount = files?.length || 0;
+    const isMaxFiles = !isUpgraded && currentFilesCount >= maxPDFs;
 
     return (
         <aside className="flex h-full w-full flex-col border-r border-gray-200 bg-white">
@@ -52,23 +62,23 @@ export default function Sidebar() {
                     </Link>
                 </Button>
 
-                {/* Upload PDF — uses FileUpload component */}
-                <FileUpload />
+                <FileUpload isMaxFiles={isMaxFiles} />
 
-                {/* Upgrade */}
-                <Link
-                    href="/dashboard/upgrade"
-                    className={`flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-all ${pathname === "/dashboard/upgrade"
-                        ? "bg-gray-100 text-black"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-black"
-                        }`}
-                >
-                    <Crown className="h-[18px] w-[18px]" />
-                    <span>Upgrade</span>
-                    <span className="ml-auto rounded-md border border-black px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-black">
-                        PRO
-                    </span>
-                </Link>
+                {!isUpgraded && (
+                    <Link
+                        href="/dashboard/upgrade"
+                        className={`flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-all ${pathname === "/dashboard/upgrade"
+                            ? "bg-gray-100 text-black"
+                            : "text-gray-600 hover:bg-gray-50 hover:text-black"
+                            }`}
+                    >
+                        <Crown className="h-[18px] w-[18px]" />
+                        <span>Upgrade</span>
+                        <span className="ml-auto rounded-md border border-black px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-black">
+                            PRO
+                        </span>
+                    </Link>
+                )}
             </nav>
 
             <div className="flex-1" />
@@ -77,23 +87,29 @@ export default function Sidebar() {
                 <div className="mb-2 flex items-center justify-between">
                     <span className="text-sm font-semibold text-black">Storage</span>
                     <span className="text-sm font-semibold text-black">
-                        {files?.length || 0}/{maxPDFs} PDFs
+                        {isUpgraded ? `${currentFilesCount} PDFs` : `${currentFilesCount}/${maxPDFs} PDFs`}
                     </span>
                 </div>
-                <Progress value={(files?.length || 0) / maxPDFs * 100} className="mb-2 h-2" />
-                <p className="text-xs text-gray-500">
-                    {maxPDFs - (files?.length || 0)} uploads remaining on free plan
-                </p>
+                {!isUpgraded && (
+                    <>
+                        <Progress value={(currentFilesCount / maxPDFs) * 100} className="mb-2 h-2" />
+                        <p className="text-xs text-gray-500">
+                            {maxPDFs - currentFilesCount} uploads remaining on free plan
+                        </p>
+                    </>
+                )}
             </div>
 
-            <div className="px-4 pb-5">
-                <Button variant="brutal" asChild className="w-full rounded-full gap-2">
-                    <Link href="/dashboard/upgrade">
-                        <ArrowUpCircle className="h-4 w-4" />
-                        Upgrade Plan
-                    </Link>
-                </Button>
-            </div>
+            {!isUpgraded && (
+                <div className="px-4 pb-5">
+                    <Button variant="brutal" asChild className="w-full rounded-full gap-2">
+                        <Link href="/dashboard/upgrade">
+                            <ArrowUpCircle className="h-4 w-4" />
+                            Upgrade Plan
+                        </Link>
+                    </Button>
+                </div>
+            )}
         </aside>
     );
 }

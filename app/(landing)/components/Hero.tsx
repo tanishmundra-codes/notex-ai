@@ -26,10 +26,8 @@ const badges = [
 function Hero() {
     return (
         <section className="relative flex flex-col items-center justify-center px-6 pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
-            {/* Background subtle grid */}
             <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
-            {/* Hat image — left */}
             <motion.div
                 className="absolute left-4 md:right-auto md:left-16 lg:left-28 top-1/3 -translate-y-1/2 hidden md:block pointer-events-none"
                 initial={{ opacity: 0, x: -40 }}
@@ -39,7 +37,6 @@ function Hero() {
                 <Image src="/hat.png" alt="Hat" width={220} height={220} className="w-40 lg:w-60 drop-shadow-lg" />
             </motion.div>
 
-            {/* Idea image — right, tilted */}
             <motion.div
                 className="absolute right-4 md:right-16 lg:right-28 top-[45%] -translate-y-1/2 hidden md:block pointer-events-none"
                 initial={{ opacity: 0, x: 40, rotate: 0 }}
@@ -49,7 +46,6 @@ function Hero() {
                 <Image src="/idea.png" alt="Idea" width={220} height={220} className="w-28 lg:w-50 drop-shadow-lg" />
             </motion.div>
 
-            {/* Star on GitHub pill */}
             <motion.a
                 href="https://github.com/tanishmundra-codes/notex-ai"
                 target="_blank"
@@ -71,7 +67,6 @@ function Hero() {
                 <Star className="h-4 w-4" />
             </motion.a>
 
-            {/* Main Heading */}
             <motion.h1
                 className="max-w-3xl text-center text-5xl font-black leading-tight tracking-tight text-black md:text-7xl"
                 custom={1}
@@ -86,7 +81,6 @@ function Hero() {
                 </span>
             </motion.h1>
 
-            {/* Subtitle */}
             <motion.p
                 className="mt-6 max-w-lg text-center text-base text-gray-500 md:text-lg"
                 custom={2}
@@ -94,14 +88,9 @@ function Hero() {
                 animate="visible"
                 variants={fadeUp}
             >
-                Write, organize, and ask questions. NotexAI turns your notes into
-                answers.
+                Think, write, and question. NotexAI turns your notes into answers.
             </motion.p>
 
-            {/* Avatar group + Trusted text */}
-
-
-            {/* CTA Buttons */}
             <motion.div
                 className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-6"
                 custom={4}

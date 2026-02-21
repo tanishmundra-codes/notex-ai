@@ -83,20 +83,24 @@ function FAQItem({ question, answer, isOpen, onToggle, delay = 0 }: FAQItemProps
 
 const faqData = [
     {
-        question: "How do I access the notes and study materials?",
-        answer: "Simply sign up for a free account and browse our comprehensive collection of notes. Premium users get access to additional features like topper notes, practice quizzes, and interactive flashcards.",
+        question: "How does NotexAI work?",
+        answer: "Upload your PDF and start writing or reading inside the editor. Select any text or question, click the AI button, and NotexAI generates a structured answer directly from your document.",
     },
     {
-        question: "Are the notes updated regularly?",
-        answer: "Yes, our content team regularly updates notes to match current curriculum standards and exam patterns.",
+        question: "How do I ask questions from my PDF?",
+        answer: "Simply type your question in the text editor, highlight it, and click AI. NotexAI analyzes your uploaded PDF and inserts a clear, structured answer instantly.",
     },
     {
-        question: "Can I download the notes for offline study?",
-        answer: "No, currently, notes are available for online viewing to ensure you always have the latest version.",
+        question: "Does the AI answer using my document only?",
+        answer: "Yes. Responses are generated based on the content of your uploaded PDF, helping you get relevant and contextual explanations.",
     },
     {
-        question: "How accurate are the practice quizzes?",
-        answer: "Our practice quizzes are carefully crafted by subject matter experts and are regularly updated to reflect current exam patterns.",
+        question: "What is included in the free plan?",
+        answer: "The free plan allows up to 5 active PDFs with full AI answering inside the editor. You can remove old files anytime to upload new ones.",
+    },
+    {
+        question: "What do I get with the Pro plan?",
+        answer: "The Pro plan removes limits and allows unlimited PDFs along with a smoother and faster study experience.",
     },
 ];
 
@@ -115,7 +119,7 @@ export function FAQ() {
     };
 
     return (
-        <section className="relative py-20 lg:py-32 bg-white dark:bg-[#1D1D1D]">
+        <section id="faq" className="relative py-20 lg:py-32 bg-white dark:bg-[#1D1D1D]">
             <div className="container mx-auto px-6 relative z-10">
                 <motion.div
                     className="mb-16 text-center md:mb-20"

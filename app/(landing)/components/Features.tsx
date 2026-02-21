@@ -44,34 +44,19 @@ function FeatureCard({ icon, title, description, delay = 0 }: FeatureCardProps) 
 const features = [
   {
     title: "PDF to Markdown",
-    description: "Upload any PDF and get clean, perfectly formatted Markdown. We auto-detect headers, lists, and bold text.",
+    description: "Upload any PDF and get perfectly structured Markdown notes. Headings, lists, and formatting are automatically organized for easy reading and editing.",
     icon: <FileText className="w-6 h-6" />,
   },
   {
     title: "Chat with PDF",
-    description: "A dedicated chat tab for every document. Ask specific questions, request clarifications, or find citations.",
+    description: "Ask questions directly from your document and get contextual answers instantly. Explore ideas, clarify concepts, or locate key information without searching manually.",
     icon: <MessageSquare className="w-6 h-6" />,
   },
   {
     title: "Smart Summaries",
-    description: "Skip the fluff. Get a concise executive summary of your document's key points and arguments.",
+    description: "Skip the noise. Get concise summaries highlighting the most important ideas, insights, and takeaways from your document.",
     icon: <Sparkles className="w-6 h-6" />,
-  },
-  {
-    title: "Code Block Detection",
-    description: "Perfect for CS students. We preserve code snippets in your PDFs and format them into proper blocks.",
-    icon: <FileJson className="w-6 h-6" />,
-  },
-  {
-    title: "One-Click Export",
-    description: "Download your notes as a .md file. Compatible with Obsidian, Notion, VS Code, or any editor.",
-    icon: <Download className="w-6 h-6" />,
-  },
-  {
-    title: "Instant Processing",
-    description: "No long wait times. Drag, drop, and start reading your summarized notes immediately.",
-    icon: <ArrowRight className="w-6 h-6" />,
-  },
+  }
 ];
 
 const containerVariants = {
@@ -81,10 +66,8 @@ const containerVariants = {
 
 export function Features() {
   return (
-    // Removed border-t or any separator classes here
     <section className="relative overflow-hidden py-24 bg-white dark:bg-[#1D1D1D]" id="features">
 
-      {/* --- ADDED DECORATIVE ICONS FOR FEATURES --- */}
       <motion.div
         initial={{ opacity: 0, rotate: -20, x: -50 }}
         whileInView={{ opacity: 0.4, rotate: -20, x: 0 }}
@@ -104,7 +87,6 @@ export function Features() {
       >
         <Layers className="w-40 h-40 text-zinc-100 dark:text-zinc-800" strokeWidth={1} />
       </motion.div>
-      {/* --- END ICONS --- */}
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <motion.div
@@ -118,7 +100,7 @@ export function Features() {
             Your PDFs, converted to <span className="underline decoration-4 decoration-black/20 dark:decoration-white/20">knowledge</span>.
           </h2>
           <p className="mx-auto max-w-3xl text-center text-lg text-gray-500 dark:text-gray-400 leading-relaxed md:text-xl">
-            Stop highlighting endless pages. Get formatted Markdown notes and a chat assistant for every file.
+            Stop reading endlessly. Turn every document into structured notes, instant answers, and actionable understanding.
           </p>
         </motion.div>
 

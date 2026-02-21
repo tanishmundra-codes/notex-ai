@@ -84,17 +84,17 @@ export function About() {
         {
             icon: <CheckCircle2 className="h-6 w-6" />,
             title: "Clear Notes, Zero Confusion",
-            description: "Upload any PDF and get simple, easy-to-understand notes in seconds. We turn complex content into clear summaries that actually make sense.",
+            description: "Upload any PDF and instantly get simplified, easy-to-understand notes. Complex topics are transformed into structured summaries that actually make sense.",
         },
         {
             icon: <Brain className="h-6 w-6" />,
             title: "AI Chat That Understands Your Notes",
-            description: "Ask questions directly from your PDF and get instant, accurate answers. Your personal AI study partner.",
+            description: "Ask questions directly from your documents and receive accurate, contextual answers. Your personal AI study partner.",
         },
         {
             icon: <Zap className="h-6 w-6" />,
             title: "Learn Faster, Study Smarter",
-            description: "Save hours of reading time with focused summaries and quick explanations. Understand more in less time without feeling overwhelmed.",
+            description: "Save hours of reading with focused summaries and quick explanations. Understand more in less time, without feeling overwhelmed.",
         },
 
     ];
@@ -131,7 +131,7 @@ export function About() {
                         <span>with NotexAi</span>
                     </h2>
                     <p className="mx-auto max-w-3xl text-center text-lg text-gray-500 dark:text-gray-400 leading-relaxed md:text-xl">
-                        Transform your learning experience with our innovative platform designed for modern students.
+                        Turn documents and notes into clear understanding. NotexAI helps students read less, understand faster, and get answers instantly.
                     </p>
                 </motion.div>
 

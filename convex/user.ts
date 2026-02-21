@@ -27,3 +27,39 @@ export const createUser = mutation({
     return "User already exists";
   },
 });
+
+export const upgradeUser = mutation({
+  args: {
+    email: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const user = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("email"), args.email))
+      .first();
+
+    if (!user) {
+      return "User not found";
+    }
+
+    await ctx.db.patch(user._id, {
+      upgrade: true,
+    });
+
+    return "User upgraded successfully";
+  },
+});
+
+export const getUserUpgradeStatus = query({
+  args: {
+    email: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const user = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("email"), args.email))
+      .first();
+
+    return user?.upgrade || false;
+  },
+});
