@@ -11,12 +11,22 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import FileUpload from "./fileUpload";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { useUser } from '@clerk/nextjs'
 
 export default function Sidebar() {
     const pathname = usePathname();
+    const { user } = useUser();
 
-    const usedPDFs = 1;
     const maxPDFs = 5;
+
+    const files = useQuery(
+        api.fileStorage.getUserFiles,
+        user?.primaryEmailAddress?.emailAddress
+            ? { userEmail: user.primaryEmailAddress.emailAddress }
+            : "skip"
+    );
 
     return (
         <aside className="flex h-full w-full flex-col border-r border-gray-200 bg-white">
@@ -67,12 +77,12 @@ export default function Sidebar() {
                 <div className="mb-2 flex items-center justify-between">
                     <span className="text-sm font-semibold text-black">Storage</span>
                     <span className="text-sm font-semibold text-black">
-                        {usedPDFs}/{maxPDFs} PDFs
+                        {files?.length || 0}/{maxPDFs} PDFs
                     </span>
                 </div>
-                <Progress value={33} className="mb-2 h-2" />
+                <Progress value={(files?.length || 0) / maxPDFs * 100} className="mb-2 h-2" />
                 <p className="text-xs text-gray-500">
-                    {maxPDFs - usedPDFs} uploads remaining on free plan
+                    {maxPDFs - (files?.length || 0)} uploads remaining on free plan
                 </p>
             </div>
 
