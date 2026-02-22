@@ -5,16 +5,14 @@ import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { TaskType } from "@google/generative-ai";
 import { v } from "convex/values";
 
+
+
 export const ingest = action({
     args: {
         splitText: v.array(v.string()),
         fileId: v.string()
     },
     handler: async (ctx, args) => {
-        // --- DEBUG LOG ADDED HERE ---
-        console.log("INGEST ACTION - Does Convex see the API Key?", !!process.env.GOOGLE_API_KEY);
-        // ----------------------------
-
         await ConvexVectorStore.fromTexts(
             args.splitText,
             args.splitText.map(() => ({ fileId: args.fileId })),
@@ -37,10 +35,6 @@ export const search = action({
         fileId: v.string()
     },
     handler: async (ctx, args) => {
-        // --- DEBUG LOG ADDED HERE ---
-        console.log("SEARCH ACTION - Does Convex see the API Key?", !!process.env.GOOGLE_API_KEY);
-        // ----------------------------
-
         if (!args.query) {
             return [];
         }
@@ -53,7 +47,7 @@ export const search = action({
         }), { ctx });
 
         const result = (await vectorStore.similaritySearch(args.query, 1)).filter(q => q.metadata.fileId === args.fileId);
-        console.log("Search Result:", result);
+        console.log(result);
 
         const resultOne = result.map(doc => ({ pageContent: doc.pageContent, metadata: doc.metadata }));
 
