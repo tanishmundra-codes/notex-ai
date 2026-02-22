@@ -17,7 +17,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   );
 
   return (
-    <header className="relative flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 md:px-6 md:py-4 flex-shrink-0">
+    <header className="relative flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 md:px-4 md:py-2 flex-shrink-0">
       <div className="md:hidden flex items-center">
         <button
           onClick={onMenuClick}
