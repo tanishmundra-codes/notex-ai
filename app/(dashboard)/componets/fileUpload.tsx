@@ -20,7 +20,7 @@ import { useUser } from '@clerk/nextjs';
 import { useAction } from "convex/react";
 
 
-function FileUpload({ isMaxFiles }: { isMaxFiles?: boolean }) {
+function FileUpload({ children, isMaxFiles }: { children?: React.ReactNode, isMaxFiles?: boolean }) {
     const generateUploadUrl = useMutation(api.fileStorage.generateUploadUrl);
     const addFileEntry = useMutation(api.fileStorage.AddFileEntryToDB);
     const embedDocuments = useAction(api.myAction.ingest);
@@ -88,14 +88,16 @@ function FileUpload({ isMaxFiles }: { isMaxFiles?: boolean }) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button
-                    disabled={isMaxFiles}
-                    variant="brutal-dark"
-                    className={`w-full rounded-full gap-2 ${open ? "bg-white text-black shadow-[1px_1px_0px_0px_#000] translate-x-[2px] translate-y-[2px]" : ""}`}
-                >
-                    <Upload className="h-[18px] w-[18px]" />
-                    Upload PDF
-                </Button>
+                {children ? children : (
+                    <Button
+                        disabled={isMaxFiles}
+                        variant="brutal-dark"
+                        className={`w-full rounded-full gap-2 ${open ? "bg-white text-black shadow-[1px_1px_0px_0px_#000] translate-x-[2px] translate-y-[2px]" : ""}`}
+                    >
+                        <Upload className="h-[18px] w-[18px]" />
+                        Upload PDF
+                    </Button>
+                )}
             </DialogTrigger>
 
             <DialogContent className="sm:max-w-md border-2 border-black rounded-2xl">
@@ -111,10 +113,10 @@ function FileUpload({ isMaxFiles }: { isMaxFiles?: boolean }) {
                 <div className="mt-2 space-y-5">
                     <div className="space-y-1.5">
                         <label className="text-sm font-semibold text-black">File</label>
-                        <div className="flex items-center gap-2 rounded-xl border-2 border-black bg-white px-3 py-2.5 shadow-[3px_3px_0px_0px_#000] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_#000]">
+                        <div className="flex flex-wrap items-center gap-2 rounded-xl border-2 border-black bg-white px-3 py-2.5 shadow-[3px_3px_0px_0px_#000] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_#000]">
                             <label
                                 htmlFor="pdf-upload"
-                                className="cursor-pointer rounded-lg border-2 border-black bg-white px-3 py-1 text-xs font-semibold text-black hover:bg-gray-50 transition-colors whitespace-nowrap"
+                                className="shrink-0 cursor-pointer rounded-lg border-2 border-black bg-white px-3 py-1 text-xs font-semibold text-black hover:bg-gray-50 transition-colors whitespace-nowrap"
                             >
                                 Choose File
                             </label>
@@ -125,7 +127,7 @@ function FileUpload({ isMaxFiles }: { isMaxFiles?: boolean }) {
                                 className="hidden"
                                 onChange={handleFileChange}
                             />
-                            <span className="truncate text-sm text-gray-500">
+                            <span className="flex-1 min-w-0 text-sm text-gray-500 break-all whitespace-normal">
                                 {selectedFile ? selectedFile.name : "No file chosen"}
                             </span>
                         </div>

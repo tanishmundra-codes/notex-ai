@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'next/navigation'
 import WorkspaceHeader from '../../componets/workspaceHeader'
 import { PDFViewer } from '../../componets/PDFViewer'
@@ -11,6 +11,7 @@ import { useUser } from '@clerk/nextjs'
 
 export default function Workspace() {
     const { fileId } = useParams();
+    const [activeTab, setActiveTab] = useState<'doc' | 'pdf'>('doc');
     const editorRef = useRef<any>(null);
     const { user } = useUser();
     const saveNote = useMutation(api.notes.saveNote);
@@ -37,12 +38,18 @@ export default function Workspace() {
 
     return (
         <div className="flex flex-col h-screen overflow-hidden">
-            <WorkspaceHeader onSave={handleSave} />
-            <div className="grid grid-cols-2 flex-1 min-h-0 overflow-hidden">
-                <div className="p-4 h-full overflow-hidden">
+            <WorkspaceHeader
+                onSave={handleSave}
+                activeTab={activeTab}
+                onTabChange={setActiveTab}
+            />
+            <div className="flex md:grid md:grid-cols-2 flex-1 min-h-0 overflow-hidden">
+                {/* Document View */}
+                <div className={`p-4 h-full overflow-hidden w-full ${activeTab === 'doc' ? 'block' : 'hidden md:block'}`}>
                     <TextEditor editorRef={editorRef} />
                 </div>
-                <div className="h-full border-l border-gray-200 bg-[#727373] px-4 overflow-hidden">
+                {/* PDF View */}
+                <div className={`h-full border-gray-200 bg-[#727373] px-4 overflow-hidden w-full md:border-l ${activeTab === 'pdf' ? 'block' : 'hidden md:block'}`}>
                     <PDFViewer fileUrl={getFileRecord?.fileUrl} />
                 </div>
             </div>

@@ -92,7 +92,7 @@ function Hero() {
             </motion.p>
 
             <motion.div
-                className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-6"
+                className="mt-10 flex flex-row items-center justify-center gap-3 sm:gap-6"
                 custom={4}
                 initial="hidden"
                 animate="visible"
@@ -101,7 +101,7 @@ function Hero() {
                 <Button
                     asChild
                     variant="brutal-dark"
-                    className="px-8 py-6 text-base font-bold cursor-pointer rounded-md"
+                    className="px-4 py-3 text-sm sm:px-8 sm:py-6 sm:text-base font-bold cursor-pointer rounded-md"
                 >
                     <Link href="/dashboard">Get Started</Link>
                 </Button>
@@ -109,7 +109,7 @@ function Hero() {
                 <Button
                     asChild
                     variant="brutal"
-                    className="px-8 py-6 text-base font-bold cursor-pointer"
+                    className="px-4 py-3 text-sm sm:px-8 sm:py-6 sm:text-base font-bold cursor-pointer"
                 >
                     <Link href="#features">View Demo →</Link>
                 </Button>

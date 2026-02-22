@@ -32,7 +32,7 @@ export function Header() {
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
 
-      <Link href="/" className="flex items-center gap-2 ml-10 md:ml-30 pr-1 md:pr-4">
+      <Link href="/" className="flex items-center gap-2 ml-0 md:ml-30 pr-1 md:pr-4">
         <div className="h-8 w-8 bg-black rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0">
           N
         </div>
@@ -54,7 +54,7 @@ export function Header() {
       </nav>
 
 
-      <div className="flex items-center gap-2 md:gap-3 mr-4 md:mr-30">
+      <div className="flex items-center gap-2 md:gap-3 mr-0 md:mr-30">
         {isLoaded && user ? (
           <div className="flex items-center gap-2">
             <Button asChild variant="brutal" className="px-5 py-2 text-sm font-semibold cursor-pointer rounded-full">
@@ -62,7 +62,7 @@ export function Header() {
                 Dashboard
               </Link>
             </Button>
-            <ProfileMenu className="md:pt-2" />
+            <ProfileMenu className="mt-2" />
           </div>
         ) : (
           <SignInButton />

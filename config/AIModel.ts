@@ -4,7 +4,7 @@ import { GoogleGenAI } from '@google/genai';
 
 export async function getGeminiResponse(prompt: string): Promise<string> {
     const ai = new GoogleGenAI({
-        apiKey: process.env.GEMINI_API_KEY,
+        apiKey: process.env.GOOGLE_API_KEY,
     });
 
     const model = 'gemini-2.5-flash';
