@@ -111,7 +111,7 @@ function Hero() {
                     variant="brutal"
                     className="px-4 py-3 text-sm sm:px-8 sm:py-6 sm:text-base font-bold cursor-pointer"
                 >
-                    <Link href="#features">View Demo →</Link>
+                    <Link href="/video">View Demo →</Link>
                 </Button>
             </motion.div>
 
